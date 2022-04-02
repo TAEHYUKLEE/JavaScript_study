@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+
+    <ol>
+        <li>HTML</li>
+        <li class="active">CSS</li>
+        <li>JavaScript</li>
+    </ol>
+
+    <script>
+        //CSS에서 선택자라는 것이 있다. 선택자를 통해서 우리가 꾸머주고자 하는 Element를 design할수 있는 기능이 있다.
+        //바로 선택자를 인자로 받아서 선택자에 해당되는 element들의 객체를 찾아서 우리에게 return해주는 method
+
+        let li1 = document.querySelector('li'); 
+        //querySelector는 조건에 맞는 인자 하나만을 return해 준다. (가장 먼저 발견된 것 하나만)
+        //querySelectorAll은 해당 인자를 모두 유사배열에 담아서 return한다.
+        li1.style.color = 'red';
+        let li2 = document.querySelector('.active');
+        li2.style.color='blue';
+
+        let lisall = document.querySelectorAll('li');
+        for(let name in lisall){ //JS에서 in은 index를 of는 그 index에 있는 데이터 인자를 받아온다
+            lisall[name].style.color = 'blue';
+        }
+        // * CSS선택자의 역할: CSS 선택자는 CSS 규칙을 적용할 요소를 정의합니다.
+        //.querySelector()는 CSS 선택자로 요소를 선택하게 해줍니다. 
+
+    </script>
+    
+</body>
+</html>

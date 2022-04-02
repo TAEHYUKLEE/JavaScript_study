@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a id="anchor" href="https://opentutorials.org">opentutorials</a>
+    <!--a객체의 속성들을href 등을 위와같이 표현할수 있게 해준거임-->
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li id="list">JavaScript</li>
+    </ul>
+
+    <input type="button" id="button" value="button"/>
+
+    <script>
+        let target = document.getElementById('list'); 
+        console.log(target.constructor.name); //return HTMLLIElement (Object)
+        console.log(target);
+
+        let target1 = document.getElementsByTagName('anchor');
+        console.log(target1.constructor.name); //return HTMLAnchorElement (Object)
+
+        let target2 = document.getElementsByTagName('button');
+        console.log(target2.constructor.name); //return HTMLInputElement (Object)
+
+        //HTMLElement는 공통으로 들어가지만 각 tag에 따라 name이 다르다.
+        //https://opentutorials.org/course/1375/6665 각 객체 name에 따라 어떻게 되어 있는지 속을 까볼수 있다.
+        //하나의 예시로 HTMLLIElement 객체는 속성으로 type과 value를 가지고 있다 type은 list의 네모, 원 을 조절하고
+        //value는 그 안에 있는 값을 변경해준다. 
+        /*(까보니까 interface로 되어있네)
+
+        interface HTMLIElement : HTMLElement{ //여기서 알수 있는 것은 : HTMLElement는 HTMLElement를 상속받는다 라는 것
+            attribute DOMstring type;
+            attribute long value;
+        }
+        interface HTMLAnchorElem : HTMLElement{
+            ...
+        }
+
+        상속이란 객체가 다른 객체의 property를 그대로 물려받으면서 동시에 자기 자신에게 필요한 property를 추가할수 있는 것
+        자식객체 부모객체 개념
+        */
+
+        target.type = "square"; //뭐 보통 CSS에서 함.
+
+
+        /*https://web.stanford.edu/class/cs98si/slides/the-document-object-model.html
+        Dom-tree*/
+
+    </script>
+    
+</body>
+</html>

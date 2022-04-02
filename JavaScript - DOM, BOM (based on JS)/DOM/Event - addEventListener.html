@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="button" id="target" value="button"/>
+
+<script>
+    let t = document.getElementById('target');
+    t.addEventListener('click', function(event){
+        alert('Hello world, '+event.target.value);
+    });
+    //(event.type, event.handler) 
+
+    t.addEventListener('click', function(event){
+        alert(2);
+    });
+    //addEventListener를 쓰는 이유는? property Listener는 위와 같이 두개를 쓰면 덮어쓰게 된다.
+    //하지만 addEventListener는 두 개 따로 실행이 된다. 
+</script>
+    
+</body>
+</html>

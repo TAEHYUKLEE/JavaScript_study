@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li class="active" id="active">CSS</li>
+        <li class="active">JavaScript</li>
+
+    </ul>
+
+    <ol>
+        <li>HTML</li>
+        <li class="active">CSS</li>
+        <li class="active">JavaScript</li>
+
+    </ol>
+    
+    <script>
+        let li = document.getElementById('active');  
+        //얘는 특징이 앞서 받아온 것과 다르게 s가 붙지 않는다. 하나의 결과만 가져온다는 특징이 있다.
+        //가장 성능이 좋다 얘를 쓸수 있다면 무조건 얘를 써야한다.
+        //본래 id용도는 class와 다르게 (같은 class에서도) 각 각 element들을 식별하기위한 용도이다. 
+        //따라서 하나만 있는 것이 맞다. 
+        console.log(li)
+
+        li.style.color='red';
+    </script>
+    
+</body>
+</html>

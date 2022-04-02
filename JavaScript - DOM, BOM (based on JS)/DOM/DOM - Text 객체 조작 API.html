@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="target">Coding everybody</p>
+    <p>data: <input type ="text" id = "datasource" value="JavaScript"></p>
+    <p>start: <input type ="text" id = "start" value="5"></p>
+    <p>end: <input type ="text" id = "end" value="5"></p>
+    <p><input type ="button" value="appendData(data)" onclick="callAppendData()">
+        <input type ="button" value="deleteData(start, end)" onclick="callDeleteData()">
+        <input type ="button" value="insertData(start, data)" onclick="callInsertData()">
+        <input type ="button" value="replaceData(start, end, data)" onclick="callReplaceData()">
+        <input type ="button" value="substringData(start, end)" onclick="callSubstringData()"></p>
+
+    <script>
+        let target = document.getElementById('target').firstChild;
+        let data = document.getElementById('datasource');
+        let start = document.getElementById('start');
+        let end = document.getElementById('end');
+
+        function callAppendData(){
+            target.appendData(data.value); //data.value는 -> data는 dataSource <input>객체를 받아오고 그 value는 JavaScript를 의미한다
+            //appendData("내용") 내용을 target끝에 append시켜준다
+        }
+
+        function callDeleteData(){
+            target.deleteData(start.value, end.value);
+            //지울거 시작과 끝을 의미한다 만약 5면 Coding중 다섯 번째인 n부터 시작해서 5개를 지운다
+        }
+
+        function callInsertData(){
+            target.insertData(start.value, data.value);
+            //Cording에서 i와 n사이에 data.value(JavaScript)가 들어갈 것이다.
+        }
+
+        function callReplaceData(){
+            target.replaceData(start.value, end.value, data.value);
+        }
+
+        function callSubstringData(){
+            alert(target.substringData(start.value, end.value));
+            //중간 부분을 따로 떼어서 알려준다
+        }
+
+    </script>
+</body>
+</html>

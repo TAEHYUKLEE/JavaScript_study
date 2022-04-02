@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li class="active">CSS</li>
+        <li class="active">JavaScript</li>
+
+    </ul>
+
+    <ol>
+        <li>HTML</li>
+        <li class="active">CSS</li>
+        <li class="active">JavaScript</li>
+
+    </ol>
+    
+    <script>
+        let lis = document.getElementsByTagName('li'); //document객체는 HTML문서 전체를 의미한다.
+        //여기서 lis는 유사배열이라고 한다 배열과 비슷하게 작동하지만 그렇다고 배열은 아니다 type은 object HTMLCollection 이네
+        //https://devsoyoung.github.io/posts/js-htmlcollection-nodelist
+        console.log(lis)
+        for (let i=0; i<lis.length; i++){
+            lis[i].style.color = 'red';
+        }
+
+        //근데 만약 내가 ul안에만 있는 li에 대한것만 색을 바꾸고 싶다?
+        let ul = document.getElementsByTagName('ul')[0]; //[0]은 첫 번째 ul에 관한 것만 가져 오겠다는 것 getElements이므로 모든 tag를 가져올거임
+        let lisoful = ul.getElementsByTagName('li'); //첫 번째 ul에 해당되는 객체를 찾고 그 객체에 대해서 li를 찾으면 된다.
+        console.log(lisoful)
+        for (let i=0; i<lisoful.length; i++){
+            lisoful[i].style.color = 'green';
+        }
+        //style은 css에 관한건데 이건 어떻게 control하는 것인지?
+
+    </script>
+    
+</body>
+</html>

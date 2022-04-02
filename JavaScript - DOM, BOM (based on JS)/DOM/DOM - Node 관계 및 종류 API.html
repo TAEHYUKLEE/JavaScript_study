@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="start"> 
+    <ul>
+        <li><a href="./532">html</a></li>
+        <li><a href="./532">css</a></li>
+        <li><a href="./532">JavaScript</a>
+            <ul>
+                <li><a href="./532">JavaScript Core</a></li>
+                <li><a href="./532">DOM</a></li>
+                <li><a href="./532">BOM</a></li>
+            </ul>
+        </li>
+    </ul>
+<script>
+    let s = document.getElementById('start');
+    console.log(1, s.firstChild); // #text <li>일것 같지만, 띄어쓰기, 줄바꿈 등 모두 자식 Node로 인식한다.
+        /*<ul> Element type의 node를 받고싶다면 <body id="start"><ul> 이렇게 붙여써야한다
+        참고로 #text는 DOM-tree상에서 Text객체에 해당된다*/
+    let ul = s.firstChild.nextSibling;
+    console.log(2, ul); //body element의 첫 자식 #text(<body id="start"> 이부분) 의 다음 형제는 <ul>이 지목된다
+    console.log(3, ul.nextSibling); //<ul>의 다음 형제는 </ul>다음에 있는 #text가 된다
+    console.log(4, ul.nextSibling.nextSibling); //</ul>다음의 #text의 다음 형제는 비로소 <script>가 된다
+    console.log(4.1, ul.firstChild); //<ul>다음 #text가 바로 첫 자식으로 들어온다
+    console.log(4.2, ul.firstChild.nextSibling); //<ul> -> #text의 첫 형제가 비로소 <li>가 들어온다
+    console.log(4.3, ul.firstChild.nextSibling.parentElement); //<ul> element가 된다.
+    console.log(5, ul.childNodes); //현재 시점 node내부에 있는 모든 자식 노드들을(각 객체들) 유사배열로 출력하게 된다.
+    console.log(6, ul.childNodes[1]); //유사배열이라 내부에 있는것은 index로 접근이 가능하다
+    console.log(7, ul.childNodes.length); //길이를 뽑을수 있다.
+
+    //Node Type에 대해서
+    console.log("body_type", s.nodeType); // body Element에 대해서 nodeType을 출력하니 // 상수 1이 나온다.
+    console.log("#text", s.firstChild.nodeType); // body의 첫 Child는 #text이고 text type은 상수 3이다.
+    console.log("document", document.nodeType); //문서 전체를 의미하는 document의 type은 9번이다.
+    console.log(document.nodeType ===9); //true가 출력될 것이다. 나중에 식별할때 쓸수 있겠다 논리형으로
+    console.log(document.nodeType ===Node.DOCUMENT_NODE); //숫자 기억하기 힘들면 이름으로 기억하자.
+    //Node객체의 속성들 (구성요소들 이름으로 넣어도 된다.)
+    //결론 nodeType은 각 node 객체 종류에 부여된 숫자가 출력된다. 그렇다면 nodeName은?
+    console.log("body_type Name", s.nodeName); //BODY가 나온다.
+    console.log("Text Name", s.firstChild.nodeName); //#text가 나온다.
+    console.log("Text Name", s.firstChild.nextSibling.nodeName); //UL이 나온다.
+</script>
+</body>
+</html>

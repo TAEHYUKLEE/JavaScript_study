@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li id="active" class="important current">JavaScript</li>
+    </ul>
+
+    <script>
+        console.log(document.getElementById('active').tagName);
+        //여기서document.getElementById('active') 는 문서객체에서 HTMLElement를 찾아온다.
+        //그러면 결국 HTMLLIElement.tagName (HTMLElement는 tagName이라는 객체가 있다)
+        //tagname은 li가 될것이다.
+        document.getElementById('active').tagName = 'a'; //실행 안됨 왜?? tagName읽기전용이다.
+    </script>
+    
+</body>
+</html>

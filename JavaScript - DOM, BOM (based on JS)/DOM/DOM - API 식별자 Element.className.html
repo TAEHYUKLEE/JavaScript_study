@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li id="active">JavaScript</li>
+    </ul>
+
+    <script>
+        let active = document.getElementById('active'); //그 특정 Element id로 검색해서 객체 반환
+        active.className = "important current";
+        console.log(active.className); //그 특정 id 출력 (active출력)
+        
+        //클래스 이름을 추가할때는 아래와 같이 문자열을 더한다
+        active.className += " readed";
+        console.log(active.className);
+        
+    </script>
+    
+</body>
+</html>

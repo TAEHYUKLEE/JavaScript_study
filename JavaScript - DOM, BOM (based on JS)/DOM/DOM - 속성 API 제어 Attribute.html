@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <a id="target" href="http://opentutorials.org"> opentutorials</a>
+
+    <script>
+        let t = document.getElementById('target');//HTMLAnchorElement객체가 들어오겠지
+        //oop인 객체지향언어는 직접 접근이 아니라 reference로 정보를 주고받는다
+        console.log(t.getAttribute('href')); // href 속성값을 반환한다.
+        //t.id, t.href를 통해서 쉽게 가져올수도 있지만 getAttribute도 가져올수 있다
+        t.setAttribute('href', 'http://www.naver.com'); // 속성을 바꿀때 set을 사용한다
+        t.setAttribute('title', 'opentutorials.org'); // 없는 속성이라면 만들어진다.
+        t.removeAttribute('title'); //다음과 같이 삭제도 된다.
+        //속성이 있는지 없는지 확인하고 싶다?
+        t.hasAttribute('title'); // 이게 나온다. boolean으로 
+        t.href = 'http://www.kakao.com' // 사실 이렇게 해도 됨.
+    </script>
+    
+</body>
+</html>

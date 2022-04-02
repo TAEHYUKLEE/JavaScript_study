@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="target" value="button"/>
+
+    <script>
+        let t = document.getElementById('target');
+
+        t.onclick = function(event){
+            alert('Hello world,' + event.target.value)
+            //여기서 event가 인자로 전달이 되는데, event는 말 그대로 event자체를 객체화 시켜놓은 것이다.
+            //여기서 event.target은 event가 행해지는 대상 즉 button을 의미하고,
+            //event.target.value는 그 button의 value를 의미한다.
+
+            console.dir(event); //이걸로도 어떤 propery가 있는지 알수 있지만 아래꺼로도 알수 있다.
+            console.log(event);
+        }
+    </script>
+</body>
+</html>
