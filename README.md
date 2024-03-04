@@ -184,3 +184,43 @@ PS C:\Users\user\Desktop\git\JavaScriptStudy\self lecture - import export\callba
 [ 'a', 'b', 'c', 'd' ] [ 'ho', 'rang', 'na', 'bi' ]
 [ 'ho', 'rang', 'na', 'bi' ]
 ```
+
+-----------------------------------
+## async (Promise를 더욱 간편하게)
+```javascript
+function fetchSomething(){
+    return new Promise((resolve, reject) => {
+        let response =  //비동기작업 이후;
+        resolve(response);
+    })
+}
+
+//위와 같이 Promise함수를 만들어 비동기작업을 했었다.
+fetchSomething()
+    .then(res=>function(res))
+    .then() ....
+
+//비동기 작업을 해야하는 함수 안에 Promise객체를 넣음으로써 resolve, then을 써서 Chaining으로 비동기 작업을 순차적으로 할 수 있게 했다.
+
+```
+
+하지만, async를 쓰면 Promise객체를 손쉽게 만들 수 있다. 
+
+```javascript
+async function fetchSomething(){
+    let response = //something 비동기작업
+    return response;
+}
+
+fetchSomething()
+    .then(res=>function(res))
+    .then() ....
+```
+위의 async keyword를 넣음으로써 Promise 객체를 만들고 return되면 Promise객체 상태는 pending에서 fulfilled로 바뀐다.
+기존 Promise객체에서 resolve를 쓰지 않고 return을 하게되면 계속 pending상태로 걸렸었는데 async에서는 간단하게 return으로 fulfilled상태로 바꿀수 있게 해주었다. 
+-> async를 사용한다고해서 Promise객체를 사용하지 않는게 아니라 단순하게 Promise를 사용할수 있게 도와주는 것이다.
+
+하지만 여전히 뒤의 코드에서는 .then() 등의 chaining을 써야한다 -> 이 부분도 과하게 되면 가독성문제와 콜백지옥과 비슷한 악효과를 내게 된다. 
+(async는 Promise객체를 비동기함수에서 좀 더 간단하게 쓸수 있게 도와주는거지 그 뒤의 Chaining logic을 단순화 시키는게 아니다)
+
+-> 이 부분에 대해서 await으로 해결할 수 있다고 한다.
