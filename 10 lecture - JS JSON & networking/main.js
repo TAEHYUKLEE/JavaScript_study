@@ -73,7 +73,7 @@ json = JSON.stringify(rabbit, (key, value)=>{
 //parse(JSON) - String을 쪼개서 다시 Object로!
 
 console.clear();
-json = JSON.stringify(rabbit);
-const obj = JSON.parse(json);
+json = JSON.stringify(rabbit); //Object-> String Json
+const obj = JSON.parse(json); //String Json -> Object
 console.log(obj);
 //Serialized된게 진짜 한 줄로 표현 한 것이네
