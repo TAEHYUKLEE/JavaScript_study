@@ -63,7 +63,7 @@ console.log(user);
 
 //Promise안쓰고 좀 더 간편하게 해주는게 asynce임
 async function fetchUser(){ //Async로 선언하면 자동적으로 code가 Promise로 변환됨.
-    //do network request in 10 secs... 
+    //do network request in 10 secs...  만약 10초짜리 네트워크 I/O작업이 걸린다면?
     return 'tay';//return이 resolve역할을 함
 }
 
