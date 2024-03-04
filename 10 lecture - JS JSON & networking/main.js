@@ -63,6 +63,11 @@ console.log(json);
 json =JSON.stringify(rabbit, ['name', 'color']);
 console.log(json);
 
+json = JSON.stringify(rabbit, (key, value)=>{
+    console.log(`key: ${key}, vlaue: ${value}`);
+    return value;
+})
+
 
 //2. JSON to Object
 //parse(JSON) - String을 쪼개서 다시 Object로!
