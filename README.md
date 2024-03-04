@@ -129,8 +129,49 @@ UserStorage_1
 })
 .catch(console.log);
 ```
-
 즉, 원래는 loginUser의 결과값인 id를 가지고 그 내부 scope에서 getRoles를 불렀어야 하는데, 
 위의 경우 Promise객체 핵심은 resolve와 then을 사용함으로써 패턴을 독립화 시켰다. loginUser 결과 id를 가지고 그 다음 .then(id =>{UserStorage_1.getRoles(id)}) - 내부 비동기 처리 끝나면 다음 결과로 넘어감
 그리고 이 getRoles의 Promise결값을 가지고 .then(myObj =>) 를 가지고 사용한다. 
 resolve then을 사용함으로써 scope을 극복하고 비동기 작업을 하나씩 해갈수 있다. 비동기 작업이 끝나면 resolve가 되고 그 다음 .then 작업이 들어가는 패턴 그래서 최종 결과까지 가는 패턴이다.
+
+
+------------------
+## Callback의 메커니즘
+```javascript
+/*
+
+let json = JSON.stringify(myObject, (key, value)=>{
+    console.log(`key: ${key}, value: ${value}`);
+    return value;
+})
+
+여기서 myObject에 있는 key, value가 어떻게 내가 정의한 Callback function의 arg로 들어가는걸까?
+*/
+
+function stringify_1(myObject, callback){
+
+    let keys = Object.keys(myObject);    
+    let values = Object.values(myObject);
+    
+    let returnValues = callback(keys, values);
+
+    return returnValues;
+}
+
+
+/* ---------------------------------------------------------------------------------- */
+let myObj = {
+    a: 'ho',
+    b: 'rang',
+    c: 'na',
+    d: 'bi'
+}
+
+let res = stringify_1(myObj, (A, B)=>{
+    console.log(A, B);
+    return B;
+})
+
+console.log(res);
+
+```
