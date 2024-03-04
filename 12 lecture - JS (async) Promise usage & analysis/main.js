@@ -9,7 +9,7 @@
 //Producer, Consumer 제공자인지 받는 사람인지 중요함
 
 //1. Producer
-//When new promise is created, the executor runs automatically.
+//When new promise is created, the executor runs automatically.  새로운 Proimse 인스턴스가 만들어지느 ㄴ순간 내부 콜백 function이 실행된다.
 // const promise = new Promise((resolve, reject)=>{
 //     //doing some heavy work(network, read files)
 //     //이런건 다 비동기적으로 처리하는 것이 좋다. 
@@ -21,6 +21,8 @@
 const promise = new Promise(function(resolve, reject){
 
     console.log('doing something...');
+
+    //promise에 인자로 넘겨준 Callbakc함수 내에 다른 비동기 Web API가 실행될때
     setTimeout(function(){
         resolve('tay')
         //reject(new Error('no network');)
@@ -30,7 +32,7 @@ const promise = new Promise(function(resolve, reject){
 });
 
 
-//Resolve랑 reject는 내가 준게 아무것도 없는데??
+//Resolve랑 reject는 내가 준게 아무것도 없는데?? 2024-03-05의 ANSWER - 내부적으로 callback함수에 넘겨주는건 Promise내부적으로 알아서 넘겨질거임.
 /*보통 Callback함수는
 function A (callback){
     callback(); 
@@ -85,6 +87,7 @@ fetchNumber
     });
 })
 .then(num => console.log(num));
+//2024-03-05의 메모 - 비동기 통신이 성공하면 그 응답이 resolve에 들어가는것. -> resolve에 있는건 then에 넘겨지게된다.
 
 //Erro Handling
 const getHen = function(){
@@ -173,3 +176,9 @@ getHen() //Promise가 return이 됨.
 
 */
 
+
+
+
+/* 결론 - Promise는 Callback지옥을 어떻게 해결한건데? 
+-> 바로 Chaining method를 통해서 비동기 통신을 하나씩 하나씩 chaining걸면서 해결해 나간다.
+마치 자바의 stream방식처럼 webflux패턴처럼 - 내가 한때 chaining method를 통해서 에러처리 등 뺏다 꼈다 할 수 있게 만든거랑 일맥상통하다.*/

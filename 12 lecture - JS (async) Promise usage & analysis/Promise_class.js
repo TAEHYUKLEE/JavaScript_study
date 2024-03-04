@@ -19,7 +19,9 @@ class Simple_Promise {
         } 
     
     then(callback) { 
-        callback(this.value); } }
+        callback(this.value); 
+    } 
+}
 
 
 // function myFunc() { 

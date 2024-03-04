@@ -62,8 +62,8 @@ UserStorage_1.loginUser(id, password) //loginUser function은 retunr으로 Objec
 //loginUser(id, password) Class선언하는 순간 resolve까지 간다.
 .then(function(id){
     return UserStorage_1.getRoles(id)}) //여기서 resolve된 값은 {name:'tay', role:'admin'}임
-.then(function(id){
-    return alert(`Hello ${id.name}, you have a ${id.role} role`);
+.then(function(myObj){
+    return alert(`Hello ${myObj.name}, you have a ${myObj.role} role`);
 })
 .catch(console.log);
 
