@@ -224,3 +224,80 @@ fetchSomething()
 (async는 Promise객체를 비동기함수에서 좀 더 간단하게 쓸수 있게 도와주는거지 그 뒤의 Chaining logic을 단순화 시키는게 아니다)
 
 -> 이 부분에 대해서 await으로 해결할 수 있다고 한다.
+
+--------------------------------------------------------
+## Promise chaining 지옥 
+async를 쓴다고 해도 결국 내부적으로는 Promise객체를 반환하여 chaining을 거는 것이다.
+```javascript
+fetchSomething()
+    .then(data => func1(data))
+    .then(res => fetch(`http://xxxxxxxx/user/${data.pwd})`)
+    .then(data => func2(data))
+    .then()....
+
+//위와 같이 Promise지옥이 펼쳐질 것이다. 어차피 의미상 func1, fetch, func2 모두 비동기 함수일 것이며 .then은 이전 then의 결과를 받아와야 한다는 것이다
+// 그래소 func1의 결과를 받아올때까지 기다려! 라는 의미로 await을 사용하게 된다 위의 코드를 await을 사용하면 이렇게 바뀐다.
+
+const data = await func1(data);
+const res = await fetch(`http://xxxxxxxx/user/${data.pwd})`);
+const data = await func2(res);
+...
+
+//위와 같이 그냥 동기적인 함수처럼 사용이 가능하게 된다. 패턴 자체가 엄청 단순하게 변함.
+
+async function fetchSomething(){
+    const data = await func1(data);
+    const res = await fetch(`http://xxxxxxxx/user/${data.pwd})`);
+    const data = await func2(res);
+    ...
+}
+
+fetchSomething().then(console.log);
+//이렇게 하면 엄청 단순하게 사용가능함 then을 여러번 쓸 필요도 없이. 
+```
+
+전체 예제로 하나만 표현해보자면 다음과 같이 들 수 있다. fetchSomething안에 비동기 함수들 또한 다 구현을 하게 된다면
+```javascript
+async function fetchSomething(input){
+    const data = await func1(input);
+    const res = await fetch(`http://xxxxxxxx/user/${data.pwd})`);
+    const data = await func2(res);
+    ...
+    return response;
+}
+
+async function func1(){
+    let res1 = //비동기작업;
+    return res1;
+}
+
+async function func2(){
+    let res2 = //비동기작업;
+    return res2;
+}
+...
+
+// func1, func2 모두 Promise객체에서 resolve에 response데이터를 넣어 then으로 반환하게 되어 있다. 그리고 그 response data를 chaining에서 벗어나서 const data로 빼주게 하는게 await역할이기도 하다 비동기를 기다려주는 것과 동시에.
+
+//여기서 fetchSomething을 Promise로 굳이 표현해보자면 다음과 같다
+function fetchSomething(input){
+    return new Promise((resolve, reject)=>{
+        //비동기 작업
+       func1(input)
+        .then(data=>fetch(xxxx))
+        .then(res=>func2(res))
+        ...
+
+        resolve(response);
+    });
+}
+//위와 같은 형식이 되겠지 그래서 fetchSoemthing도 async로 묶어줘야 한다 (비동기 작업이니까)
+
+```
+
+
+<br><br>
+
+참고자료 
+1. https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-async-await
+
