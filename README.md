@@ -295,6 +295,44 @@ function fetchSomething(input){
 
 ```
 
+### 여기서 또 문제점이 있다 func1과 func2 서로 병렬처리를 하고 싶으면? func1과 func2는 서로 연관이 없어서 독립적인 병렬처리를 하는 것이 더 빠를수도 있다.
+
+```javascript
+//Promise는 인스턴스가 생성되는 순간 Pending상태로가 되면서 그 안의 로직이 실행된다고 했다. 이점을 이용해보자
+async function fetchSomething(input){
+    const func1Promise =  func1();
+    const func2Promise =  func2();
+    //위의 두 func1, 2는 먼저 실행된다 await이 있으면 func1이 끝날때까지 기다리겠지만 func1, func2는 비동기적으로 각자 실행된다
+
+
+    //Logic 동기적으로 수행되어야 한다.
+    const data1 = await func1Promise;
+    //순차적으로 data1이 쓰여야하는 경우를 생각해보자. (요전히 data1과 data2는 독립적임)
+    const res1 = await func3(data1);
+    const data2 = await func2Promise; //여기서 data2를 가져오는걸 기다릴 필요가 없으니 앞에서 먼저 실행시켜놓은거임 그리고 데이터를 받아와서 기다리고 있는 상태였었음
+    const final_res = await func4(res1, data2); 
+    //이미 실행된 값이 있으므로 순차적으로 값을 받아온다 (참고로 위의 예제에서 fetch는 빼고함)
+
+    return final_res;
+}
+
+//이렇게 하는걸 위처럼 안하고 Promise.all()이란걸 써서 구현한다
+async function fetchSomething(input){
+    return Promise.all([func1(), func2()]); // Promise.all은 병렬처리 할 Promise들이 다 받아와질때까지 기다린다.
+        .then(datas => function....)
+}
+
+//참고로 Promise.race([func1(), func2()]); 라는 것도 있는데 둘 중에 빠르게 받아오는 것부터 먼저 반환해준다.
+
+```
+요약하자면, data1과 data2를 가져오는데 순차적으로 가져올 필요가 없고 병렬적으로 가져오면 된다. data1, data2를 가져오는데 시간을 줄이기 위해 병렬처리 한거고 마지막에 로직은 순차적으로 (동기적)으로 수행되어야 하므로
+await을 쓰면서 수행한 것이다. func3에는 data1이 필요하고 func4에는 func3의 데이터와 data1이 필요하므로 (data2는 미리 준비되어 있다. 다만 await으로 동기적으로 수행할 뿐)
+
+
+결론
+1. await는 .then을 순차적으로 사용할 수 있게 바꿔준다.
+2. 병렬처리 하기 위해서는 Promise 객체를 먼저 수행한다 -> Promise.all()을 사용한다.
+
 
 <br><br>
 
