@@ -174,4 +174,13 @@ let res = stringify_1(myObj, (A, B)=>{
 
 console.log(res);
 
+
+#Result
+Node.js v21.6.2
+PS C:\Users\user\Desktop\git\JavaScriptStudy\self lecture - import export\callback_func> node .\stringify_mechanism.js
+[ 'a', 'b', 'c', 'd' ] [ 'ho', 'rang', 'na', 'bi' ]
+[ 'ho', 'rang', 'na', 'bi' ]
+PS C:\Users\user\Desktop\git\JavaScriptStudy\self lecture - import export\callback_func> node .\stringify_mechanism.js
+[ 'a', 'b', 'c', 'd' ] [ 'ho', 'rang', 'na', 'bi' ]
+[ 'ho', 'rang', 'na', 'bi' ]
 ```
